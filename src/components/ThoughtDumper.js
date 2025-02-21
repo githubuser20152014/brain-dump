@@ -6,6 +6,7 @@ const ThoughtDumper = () => {
   const [currentSummary, setCurrentSummary] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [countdown, setCountdown] = useState(null);
   const [entries, setEntries] = useState(() => {
     // Load entries from localStorage on initial render
     const savedEntries = localStorage.getItem('thoughtEntries');
@@ -16,6 +17,17 @@ const ThoughtDumper = () => {
   useEffect(() => {
     localStorage.setItem('thoughtEntries', JSON.stringify(entries));
   }, [entries]);
+
+  // Add countdown effect
+  useEffect(() => {
+    if (currentSummary && countdown !== null) {
+      const timer = setInterval(() => {
+        setCountdown(prev => prev - 1);
+      }, 1000);
+
+      return () => clearInterval(timer);
+    }
+  }, [currentSummary, countdown]);
 
   const handleThoughtSubmit = async () => {
     if (!thought.trim()) {
@@ -45,8 +57,9 @@ const ThoughtDumper = () => {
       
       const data = await response.json();
       
-      // Set current summary first
+      // Set current summary and start countdown
       setCurrentSummary(data.summary);
+      setCountdown(5);
       
       // Then add to history after a 5-second delay
       setTimeout(() => {
@@ -56,9 +69,10 @@ const ThoughtDumper = () => {
           timestamp
         }, ...prevEntries]);
         
-        // Clear the input and summary for new thought
+        // Clear the input, summary and countdown
         setThought('');
         setCurrentSummary('');
+        setCountdown(null);
       }, 5000);
       
     } catch (err) {
@@ -150,6 +164,11 @@ const ThoughtDumper = () => {
             {loading ? 'Processing...' : 'Summarize'}
           </button>
           {error && <div className="error-message">{error}</div>}
+          {countdown !== null && (
+            <div className="countdown-notice">
+              Moving to history in {countdown} seconds...
+            </div>
+          )}
           <div className="summary-content">
             {currentSummary ? (
               currentSummary.split('\n').map((line, index) => (

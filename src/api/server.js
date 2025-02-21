@@ -32,7 +32,7 @@ app.post('/api/summarize', async (req, res) => {
 
 Title: <create an appropriate title>
 
-Key items:
+Key issues:
 - Item 1
 - Item 2
 
