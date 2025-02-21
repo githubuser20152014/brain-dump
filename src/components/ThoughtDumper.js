@@ -69,10 +69,29 @@ const ThoughtDumper = () => {
     }
   };
 
-  const ThoughtEntry = ({ entry }) => (
+  const handleDeleteEntry = (index) => {
+    setEntries(prevEntries => prevEntries.filter((_, i) => i !== index));
+  };
+
+  const handleClearCurrent = () => {
+    setThought('');
+    setCurrentSummary('');
+    setError(null);
+  };
+
+  const ThoughtEntry = ({ entry, onDelete }) => (
     <div className="thought-entry">
       <div className="thought-input-box">
-        <h2>What's on your mind?</h2>
+        <div className="header-row">
+          <h2>What's on your mind?</h2>
+          <button 
+            className="delete-btn"
+            onClick={onDelete}
+            aria-label="Delete entry"
+          >
+            ×
+          </button>
+        </div>
         <p className="subtitle">(only one big idea please...)</p>
         <div className="thought-text">
           {entry.thought}
@@ -99,7 +118,18 @@ const ThoughtDumper = () => {
       {/* Current input form */}
       <div className="thought-entry current">
         <div className="thought-input-box">
-          <h2>What's on your mind?</h2>
+          <div className="header-row">
+            <h2>What's on your mind?</h2>
+            {(thought || currentSummary) && (
+              <button 
+                className="delete-btn"
+                onClick={handleClearCurrent}
+                aria-label="Clear current entry"
+              >
+                ×
+              </button>
+            )}
+          </div>
           <p className="subtitle">(only one big idea please...)</p>
           <textarea
             value={thought}
@@ -136,7 +166,11 @@ const ThoughtDumper = () => {
 
       {/* History of previous entries */}
       {entries.map((entry, index) => (
-        <ThoughtEntry key={index} entry={entry} />
+        <ThoughtEntry 
+          key={index} 
+          entry={entry} 
+          onDelete={() => handleDeleteEntry(index)}
+        />
       ))}
     </div>
   );

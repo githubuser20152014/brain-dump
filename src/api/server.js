@@ -30,17 +30,19 @@ app.post('/api/summarize', async (req, res) => {
         role: "user",
         content: `Analyze this thought and provide a response in exactly this format:
 
-Summary:
-- [point 1]
-- [point 2]
+Title: <create an appropriate title>
 
-Action Items:
-- [action 1]
-- [action 2]
+Key items:
+- Item 1
+- Item 2
 
-[One line of motivational encouragement]
+Action items:
+- Item 1
+- Item 2
 
-Use exactly this format with the dashes and line breaks as shown. Be concise and clear.
+<One line of motivation>
+
+Use exactly this format with the title, sections, dashes and line breaks as shown. Be concise and clear.
 
 Thought: ${thought}
 Timestamp: ${timestamp}`

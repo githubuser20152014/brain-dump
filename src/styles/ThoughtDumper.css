@@ -1,3 +1,10 @@
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
 .thought-dumper {
   display: flex;
   flex-direction: column;
@@ -11,22 +18,31 @@
   display: flex;
   gap: 2rem;
   padding: 2rem;
-  background: #f8f9fa;
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: transform 0.2s ease;
+}
+
+.thought-entry:hover {
+  transform: translateY(-2px);
 }
 
 .thought-entry.current {
-  background: white;
+  background: rgba(255, 255, 255, 0.95);
   border: 2px solid #2c3e50;
+  box-shadow: 0 12px 32px rgba(31, 38, 135, 0.15);
 }
 
 .thought-input-box, .thought-summary-box {
   flex: 1;
   padding: 2rem;
   border-radius: 1rem;
-  background: white;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 16px rgba(31, 38, 135, 0.07);
+  backdrop-filter: blur(4px);
 }
 
 .thought-text {
@@ -58,9 +74,17 @@ textarea {
   min-height: 200px;
   padding: 1rem;
   margin: 1rem 0;
-  border: 1px solid #ddd;
+  border: 1px solid rgba(44, 62, 80, 0.1);
   border-radius: 0.5rem;
   resize: vertical;
+  background: rgba(255, 255, 255, 0.9);
+  transition: border-color 0.2s ease;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #2c3e50;
+  box-shadow: 0 0 0 2px rgba(44, 62, 80, 0.1);
 }
 
 .timestamp {
@@ -85,8 +109,8 @@ textarea {
 
 .summary-content {
   margin-top: 1rem;
-  padding: 1rem;
-  background: #f8f9fa;
+  padding: 1.5rem;
+  background: rgba(248, 249, 250, 0.9);
   border-radius: 0.5rem;
   min-height: 200px;
   white-space: pre-line;
@@ -117,4 +141,38 @@ textarea {
 
 .bullet-point {
   padding-left: 20px;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #dc3545;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  line-height: 1;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.delete-btn:hover {
+  background: #dc3545;
+  color: white;
+}
+
+.delete-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.5);
 } 
