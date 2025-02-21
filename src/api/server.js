@@ -40,9 +40,9 @@ Action items:
 - Item 1
 - Item 2
 
-<One line of motivation>
+[Write one line of motivation here without any prefix or label]
 
-Use exactly this format with the title, sections, dashes and line breaks as shown. Be concise and clear.
+Use exactly this format with the title, sections, dashes and line breaks as shown. Be concise and clear. For the final motivational line, do not include any prefix or label - just write the motivational statement directly.
 
 Thought: ${thought}
 Timestamp: ${timestamp}`
